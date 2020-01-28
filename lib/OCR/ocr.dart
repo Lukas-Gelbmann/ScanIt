@@ -10,7 +10,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _torchOcr = false;
-  bool _multipleOcr = true;
   bool _showTextOcr = true;
   List<OcrText> _textsOcr = [];
 
@@ -32,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: new Scaffold(
         appBar: new AppBar(
-          title: new Text("OCR"), //Todo center it
+          title: new Text("New Scan"),
           centerTitle: true,
         ),
         body: _getOcrScreen(context),
@@ -46,11 +45,6 @@ class _MyAppState extends State<MyApp> {
   Widget _getOcrScreen(BuildContext context) {
     List<Widget> items = [];
 
-    items.add(new SwitchListTile(
-      title: const Text('Return all texts:'),
-      value: _multipleOcr,
-      onChanged: (value) => setState(() => _multipleOcr = value),
-    ));
     items.add(new SwitchListTile(
       title: const Text('Show text:'),
       value: _showTextOcr,
@@ -106,7 +100,7 @@ class _MyAppState extends State<MyApp> {
       texts = await FlutterMobileVision.read(
         flash: _torchOcr,
         autoFocus: true,
-        multiple: _multipleOcr,
+        multiple: true,
         waitTap: true,
         showText: _showTextOcr,
         preview: FlutterMobileVision.getPreviewSizes(FlutterMobileVision.CAMERA_BACK).elementAt(0),

@@ -36,7 +36,7 @@ class _OcrTextDetailState extends State<OcrTextDetail> {
     print("ocr_text_detail started");
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Face Details'),
+        title: new Text('Save Text'),
       ),
       body: new ListView(
         children: <Widget>[
@@ -53,12 +53,19 @@ class _OcrTextDetailState extends State<OcrTextDetail> {
             ),
             title: const Text('Text'),
           ),
-          new RaisedButton(
-            onPressed: () async {
-              _save();
-            },
-            child: new Text('SAVE'),
-          )
+          new Padding(
+            padding: const EdgeInsets.only(
+              left: 18.0,
+              right: 18.0,
+              bottom: 12.0,
+            ),
+            child: new RaisedButton(
+              onPressed: () async {
+                _save();
+              },
+              child: new Text('SAVE'),
+            ),
+          ),
         ],
       ),
     );
@@ -71,7 +78,8 @@ class _OcrTextDetailState extends State<OcrTextDetail> {
     list.add(headingController.text.toString());
     list.add(textController.text.toString());
     print('$list');
-    await prefs.setString('$counter heading', headingController.text.toString());
+    await prefs.setString(
+        '$counter heading', headingController.text.toString());
     await prefs.setString('$counter text', textController.text.toString());
     await prefs.setInt('counter', counter);
     print('Saved on position $counter ');
