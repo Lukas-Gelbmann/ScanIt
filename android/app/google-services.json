@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "256714003681",
+    "firebase_url": "https://fluttertestlogin-aa970.firebaseio.com",
+    "project_id": "fluttertestlogin-aa970",
+    "storage_bucket": "fluttertestlogin-aa970.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256714003681:android:2c59fd5a09d043a8bc93a0",
+        "android_client_info": {
+          "package_name": "at.fhooe.mc.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256714003681-eej8u2qversfqmbakhrdnc1m0tu5n4k6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJv_IGouprtn_d4BSpDFBOJrXtWsE32Jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256714003681-eej8u2qversfqmbakhrdnc1m0tu5n4k6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
