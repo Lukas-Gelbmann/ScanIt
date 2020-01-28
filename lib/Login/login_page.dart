@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(title: new Text('Flutter Login Demo')),
+        appBar: new AppBar(title: new Text('ScanIt')),
         body: new Builder(
           builder: (context) => Container(
             padding: EdgeInsets.all(16.0),

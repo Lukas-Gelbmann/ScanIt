@@ -1,4 +1,4 @@
-# flutter_firebase_auth
+# ScanIt
 
 A new Flutter application.
 
