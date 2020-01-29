@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
 
       ),
       body: FutureBuilder<List>(
-        future: Services.getEntries(),
+        future: Services.getEntries(widget),
         initialData: List(),
         builder: (context, snapshot) {
           return snapshot.hasData
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
           print("Clicked");
           Navigator.push(
             context,
-            new MaterialPageRoute(builder: (context) => new MyApp()),
+            new MaterialPageRoute(builder: (context) => new OCR(auth: widget.auth)),
           );
         },
       ),
@@ -116,11 +116,12 @@ class _HomePageState extends State<HomePage> {
   remove(item) async {
     print('remove');
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int counter = (prefs.getInt('counter') ?? 0);
+    String uid = await widget.auth.currentUser();
+    int counter = (prefs.getInt('counter $uid') ?? 0);
     for (int i = 1; i <= counter; i++) {
-      if (prefs.getString('$i text') == item.text) {
-        prefs.remove('$i heading');
-        prefs.remove('$i text');
+      if (prefs.getString('$i text $uid') == item.text) {
+        prefs.remove('$i heading $uid');
+        prefs.remove('$i text $uid');
         break;
       }
     }
@@ -137,15 +138,18 @@ class _HomePageState extends State<HomePage> {
 }
 
 class Services {
-  static Future<List<Entry>> getEntries() async {
+
+  static Future<List<Entry>> getEntries(widget) async {
     List<Entry> entries = List<Entry>();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int counter = (prefs.getInt('counter') ?? 0);
+    String uid = await widget.auth.currentUser();
+
+    int counter = (prefs.getInt('counter $uid') ?? 0);
     for (int i = 1; i <= counter; i++) {
-      if (prefs.getString('$i text') != null) {
+      if (prefs.getString('$i text $uid') != null) {
         entries.add(new Entry(
-            heading: prefs.getString('$i heading'),
-            text: prefs.getString('$i text')));
+            heading: prefs.getString('$i heading $uid'),
+            text: prefs.getString('$i text $uid')));
       }
     }
     print('Loaded');

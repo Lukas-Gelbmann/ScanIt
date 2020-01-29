@@ -1,14 +1,18 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth/Login/auth.dart';
 import 'package:flutter_mobile_vision/flutter_mobile_vision.dart';
 import 'ocr_text_detail.dart';
 
-class MyApp extends StatefulWidget {
+class OCR extends StatefulWidget {
+  final BaseAuth auth;
+  OCR({this.auth});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  _OCRState createState() => _OCRState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _OCRState extends State<OCR> {
   bool _torchOcr = false;
   bool _showTextOcr = true;
   List<OcrText> _textsOcr = [];
@@ -75,7 +79,7 @@ class _MyAppState extends State<MyApp> {
         context: context,
         tiles: _textsOcr
             .map(
-              (ocrText) => new OcrTextWidget(ocrText),
+              (ocrText) => new OcrTextWidget(ocrText: ocrText, auth: widget.auth),
             )
             .toList(),
       ),
@@ -123,10 +127,10 @@ class _MyAppState extends State<MyApp> {
 /// OcrTextWidget
 ///
 class OcrTextWidget extends StatelessWidget {
-                                                //TODO Here gets the list view Created..... need to change it to another activity...
   final OcrText ocrText;
+  final BaseAuth auth;
 
-  OcrTextWidget(this.ocrText);
+  OcrTextWidget({this.ocrText, this.auth});
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +141,7 @@ class OcrTextWidget extends StatelessWidget {
       trailing: const Icon(Icons.arrow_forward),
       onTap: () => Navigator.of(context).push(
         new MaterialPageRoute(
-          builder: (context) => new OcrTextDetail(ocrText),
+          builder: (context) => new OcrTextDetail(ocrText: ocrText, auth: auth),
         ),
       ),
     );

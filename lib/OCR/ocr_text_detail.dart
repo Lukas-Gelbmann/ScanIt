@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth/Login/auth.dart';
 import 'package:flutter_mobile_vision/flutter_mobile_vision.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OcrTextDetail extends StatefulWidget {
   final OcrText ocrText;
+  final BaseAuth auth;
 
-  OcrTextDetail(this.ocrText);
+  OcrTextDetail({this.ocrText, this.auth});
 
   @override
   _OcrTextDetailState createState() => new _OcrTextDetailState();
@@ -73,15 +75,11 @@ class _OcrTextDetailState extends State<OcrTextDetail> {
 
   Future<Null> _save() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int counter = (prefs.getInt('counter') ?? 0) + 1;
-    List<String> list = new List<String>();
-    list.add(headingController.text.toString());
-    list.add(textController.text.toString());
-    print('$list');
-    await prefs.setString(
-        '$counter heading', headingController.text.toString());
-    await prefs.setString('$counter text', textController.text.toString());
-    await prefs.setInt('counter', counter);
+    String uid = await widget.auth.currentUser();
+    int counter = (prefs.getInt('counter $uid') ?? 0) + 1;
+    await prefs.setString('$counter heading $uid', headingController.text.toString());
+    await prefs.setString('$counter text $uid', textController.text.toString());
+    await prefs.setInt('counter $uid', counter);
     print('Saved on position $counter ');
     Navigator.pop(context);
   }
