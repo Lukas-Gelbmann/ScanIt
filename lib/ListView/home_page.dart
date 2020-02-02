@@ -34,7 +34,6 @@ class _HomePageState extends State<HomePage> {
               child: new Text('Log out',
                   style: new TextStyle(fontSize: 17.0, color: Colors.white)))
         ],
-
       ),
       body: FutureBuilder<List>(
         future: Services.getEntries(widget),
@@ -60,11 +59,11 @@ class _HomePageState extends State<HomePage> {
                           icon: Icon(Icons.menu),
                           itemBuilder: (context) => [
                             PopupMenuItem(
-                              value: {2, item},
+                              value: {'share', item},
                               child: Text("Share"),
                             ),
                             PopupMenuItem(
-                              value: {1, item},
+                              value: {'delete', item},
                               child: Text("Delete"),
                             ),
                           ],
@@ -85,7 +84,8 @@ class _HomePageState extends State<HomePage> {
           print("Clicked");
           Navigator.push(
             context,
-            new MaterialPageRoute(builder: (context) => new OCR(auth: widget.auth)),
+            new MaterialPageRoute(
+                builder: (context) => new OCR(auth: widget.auth)),
           );
         },
       ),
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onSelected(Set value) {
-    if (value.elementAt(0) == 1) {
+    if (value.elementAt(0) == 'delete') {
       remove(value.elementAt(1));
     } else {
       share(context, value.elementAt(1));
@@ -138,7 +138,6 @@ class _HomePageState extends State<HomePage> {
 }
 
 class Services {
-
   static Future<List<Entry>> getEntries(widget) async {
     List<Entry> entries = List<Entry>();
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -77,7 +77,8 @@ class _OcrTextDetailState extends State<OcrTextDetail> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String uid = await widget.auth.currentUser();
     int counter = (prefs.getInt('counter $uid') ?? 0) + 1;
-    await prefs.setString('$counter heading $uid', headingController.text.toString());
+    await prefs.setString(
+        '$counter heading $uid', headingController.text.toString());
     await prefs.setString('$counter text $uid', textController.text.toString());
     await prefs.setInt('counter $uid', counter);
     print('Saved on position $counter ');

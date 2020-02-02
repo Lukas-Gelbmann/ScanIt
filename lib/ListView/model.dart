@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class Entry{
+class Entry {
   final String heading;
   final String text;
 

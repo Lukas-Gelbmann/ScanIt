@@ -4,7 +4,7 @@ import 'package:flutter_firebase_auth/ListView/home_page.dart';
 import 'package:flutter_firebase_auth/Login/login_page.dart';
 
 class RootPage extends StatefulWidget {
-  RootPage({Key key, this.auth}): super(key: key);
+  RootPage({Key key, this.auth}) : super(key: key);
 
   final BaseAuth auth;
 
@@ -25,7 +25,8 @@ class _RootPageState extends State<RootPage> {
     super.initState();
     widget.auth.currentUser().then((userId) {
       setState(() {
-         _authStatus = userId != null ? AuthStatus.signedIn : AuthStatus.notSignedIn;
+        _authStatus =
+            userId != null ? AuthStatus.signedIn : AuthStatus.notSignedIn;
       });
     });
   }

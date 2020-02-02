@@ -6,6 +6,7 @@ import 'ocr_text_detail.dart';
 
 class OCR extends StatefulWidget {
   final BaseAuth auth;
+
   OCR({this.auth});
 
   @override
@@ -16,8 +17,6 @@ class _OCRState extends State<OCR> {
   bool _torchOcr = false;
   bool _showTextOcr = true;
   List<OcrText> _textsOcr = [];
-
-
 
   @override
   void initState() {
@@ -43,9 +42,6 @@ class _OCRState extends State<OCR> {
     );
   }
 
-  ///
-  /// OCR Screen
-  ///
   Widget _getOcrScreen(BuildContext context) {
     List<Widget> items = [];
 
@@ -74,18 +70,17 @@ class _OCRState extends State<OCR> {
       ),
     );
 
-   items.addAll(
+    items.addAll(
       ListTile.divideTiles(
         context: context,
         tiles: _textsOcr
             .map(
-              (ocrText) => new OcrTextWidget(ocrText: ocrText, auth: widget.auth),
+              (ocrText) =>
+                  new OcrTextWidget(ocrText: ocrText, auth: widget.auth),
             )
             .toList(),
       ),
     );
-
-
 
     return new ListView(
       padding: const EdgeInsets.only(
@@ -95,9 +90,7 @@ class _OCRState extends State<OCR> {
     );
   }
 
-  ///
-  /// OCR Method
-  ///
+  /// OCR Method !!!
   Future<Null> _read() async {
     List<OcrText> texts = [];
     try {
@@ -107,11 +100,12 @@ class _OCRState extends State<OCR> {
         multiple: true,
         waitTap: true,
         showText: _showTextOcr,
-        preview: FlutterMobileVision.getPreviewSizes(FlutterMobileVision.CAMERA_BACK).elementAt(0),
+        preview:
+            FlutterMobileVision.getPreviewSizes(FlutterMobileVision.CAMERA_BACK)
+                .elementAt(0),
         camera: FlutterMobileVision.CAMERA_BACK,
         fps: 10.0,
       );
-
     } on Exception {
       texts.add(new OcrText('Failed to recognize text.'));
     }
@@ -122,10 +116,6 @@ class _OCRState extends State<OCR> {
   }
 }
 
-
-///
-/// OcrTextWidget
-///
 class OcrTextWidget extends StatelessWidget {
   final OcrText ocrText;
   final BaseAuth auth;
@@ -147,5 +137,3 @@ class OcrTextWidget extends StatelessWidget {
     );
   }
 }
-
-
